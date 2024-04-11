@@ -2,18 +2,15 @@ import express, { Request, Response, NextFunction } from "express";
 import createHttpError, { HttpError } from "http-errors";
 
 import globalErrorHandler from "./middlewares/globalErrorHandler";
+import userRouter from "./user/userRouter";
 
 const app = express();
 
 app.get("/", (req, res, next) => {
-  // throw new Error("test error");
-
-  const error = createHttpError(400, "something went wrong");
-
-  throw error;
-
   res.json({ message: "Welcome to elib api" });
 });
+
+app.use("/api/users", userRouter);
 
 // Global error handler
 
