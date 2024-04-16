@@ -157,4 +157,15 @@ const updateBook = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export { createBook, updateBook };
+const listBooks = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    //TODO: add pagination
+    const books = await Book.find();
+
+    return res.status(200).json(books);
+  } catch (error) {
+    return next(createHttpError(500, "Error while listing books."));
+  }
+};
+
+export { createBook, updateBook, listBooks };
